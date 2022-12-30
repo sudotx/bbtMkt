@@ -1,5 +1,5 @@
 {
-  "contractName": "PolyToken",
+  "contractName": "BetToken",
   "abi": [
     {
       "inputs": [],

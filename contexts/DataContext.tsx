@@ -2,8 +2,8 @@ declare let window: any;
 import { createContext, useContext, useState } from "react";
 import Web3 from "web3";
 import ethers from "ethers";
-import Polymarket from "../abis/Polymarket.json";
-import PolyToken from "../abis/PolyToken.json";
+import Betmarket from "../abis/Betmarket.json";
+import BetToken from "../abis/BetToken.json";
 
 interface DataContextProps {
   account: string;
@@ -16,7 +16,7 @@ interface DataContextProps {
 const DataContext = createContext<DataContextProps>({
   account: "",
   loading: true,
-  loadWeb3: async () => {},
+  loadWeb3: async () => { },
   polymarket: null,
   polyToken: null,
 });
@@ -37,7 +37,7 @@ export const useProviderData = () => {
 
   const loadWeb3 = async () => {
     if (window.ethereum) {
-      
+
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       await window.ethereum.enable();
 
@@ -52,18 +52,17 @@ export const useProviderData = () => {
   };
 
   const loadBlockchainData = async () => {
-    // var tempContract = new ethers.Contract(
-    //   Polymarket.abi
-    //   // poly market
-    // );
-    // setPolymarket(tempContract);
-    // var tempTokenContract = new ethers.Contract(
-    //   PolyToken.abi
+    var tempContract = new ethers.Contract(
+      Betmarket.abi,
+      0x7693d5Aa88004f6c5c2e16D7b13Db04aFaae797b
+    );
+    setPolymarket(tempContract);
+    var tempTokenContract = new ethers.Contract(
+      BetToken.abi,
+      0xe450830A28e479F8bd6f8C1706B1CAB160Cb313F
+    );
 
-    //   // polyToken address
-    // );
-
-    // setPolyToken(tempTokenContract);
+    setPolyToken(tempTokenContract);
     setTimeout(() => {
       setLoading(false);
     }, 500);
