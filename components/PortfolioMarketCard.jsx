@@ -3,21 +3,8 @@ import Img from "next/image";
 import React from "react";
 import Web3 from "web3";
 
-export interface MarketProps {
-  id: string;
-  title: string;
-  imageHash: string;
-  totalAmount: string;
-  totalYes: string;
-  totalNo: string;
-  userYes: string;
-  userNo: string;
-  hasResolved?: boolean;
-  timestamp: string;
-  endTimestamp: string;
-}
 
-export const PortfolioMarketCard: React.FC<MarketProps> = ({
+export const PortfolioMarketCard = ({
   title,
   userYes,
   userNo,

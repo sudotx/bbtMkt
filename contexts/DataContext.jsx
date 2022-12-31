@@ -1,19 +1,11 @@
-declare let window: any;
 import { createContext, useContext, useState } from "react";
 import Web3 from "web3";
 import ethers from "ethers";
 import Betmarket from "../abis/Betmarket.json";
 import BetToken from "../abis/BetToken.json";
 
-interface DataContextProps {
-  account: string;
-  loading: boolean;
-  loadWeb3: () => Promise<void>;
-  polymarket: any;
-  polyToken: any;
-}
 
-const DataContext = createContext<DataContextProps>({
+const DataContext = createContext({
   account: "",
   loading: true,
   loadWeb3: async () => { },
@@ -21,19 +13,19 @@ const DataContext = createContext<DataContextProps>({
   polyToken: null,
 });
 
-export const DataProvider: React.FC = ({ children }) => {
+export const DataProvider = ({ children }) => {
   const data = useProviderData();
 
   return <DataContext.Provider value={data}>{children}</DataContext.Provider>;
 };
 
-export const useData = () => useContext<DataContextProps>(DataContext);
+export const useData = () => useContext(DataContext);
 
 export const useProviderData = () => {
   const [loading, setLoading] = useState(true);
   const [account, setAccount] = useState("");
-  const [polymarket, setPolymarket] = useState<any>();
-  const [polyToken, setPolyToken] = useState<any>();
+  const [polymarket, setPolymarket] = useState();
+  const [polyToken, setPolyToken] = useState();
 
   const loadWeb3 = async () => {
     if (window.ethereum) {

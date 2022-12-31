@@ -6,24 +6,16 @@ import Navbar from "../components/Navbar";
 import { useData } from "../contexts/DataContext";
 import styles from "../styles/Home.module.css";
 
-export interface MarketProps {
-  id: string;
-  title: string;
-  imageHash: string;
-  totalAmount: string;
-  totalYes: string;
-  totalNo: string;
-}
 
 export default function Home() {
   const { polymarket, account, loadWeb3, loading } = useData();
-  const [markets, setMarkets] = useState<MarketProps[]>([]);
+  const [markets, setMarkets] = useState([]);
 
   const getMarkets = useCallback(async () => {
     var totalQuestions = await polymarket.methods
       .totalQuestions()
       .call({ from: account });
-    var dataArray: MarketProps[] = [];
+    var dataArray = [];
     for (var i = 0; i < totalQuestions; i++) {
       var data = await polymarket.methods.questions(i).call({ from: account });
       dataArray.push({

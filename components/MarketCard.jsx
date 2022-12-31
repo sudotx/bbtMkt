@@ -4,7 +4,7 @@ import React from "react";
 import Web3 from "web3";
 import { MarketProps } from "../pages";
 
-export const MarketCard: React.FC<MarketProps> = ({
+export const MarketCard = ({
   id,
   title,
   totalAmount,

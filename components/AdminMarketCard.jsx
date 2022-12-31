@@ -2,16 +2,8 @@ import Img from "next/image";
 import React from "react";
 import Web3 from "web3";
 
-interface Props {
-  id: string;
-  title: string;
-  imageHash: string;
-  totalAmount: string;
-  onYes: () => void;
-  onNo: () => void;
-}
 
-export const AdminMarketCard: React.FC<Props> = ({
+export const AdminMarketCard = ({
   title,
   totalAmount,
   onYes,

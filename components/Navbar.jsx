@@ -59,10 +59,6 @@ const TabButton = ({
   title,
   isActive,
   url,
-}: {
-  title: string;
-  isActive: boolean;
-  url: string;
 }) => {
   return (
     <Link href={url} passHref>

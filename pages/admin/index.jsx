@@ -8,19 +8,17 @@ import { useData } from "../../contexts/DataContext";
 
 const Admin = () => {
   const router = useRouter();
-  const { polymarket, loadWeb3, account } = useData!();
-  const [loading, setLoading] = React.useState(false);
+  const { polymarket, loadWeb3, account } = useData();
+  const [loading, setLoading] = useState(false);
   const client = create({ url: "https://ipfs.infura.io:5001/api/v0" });
 
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [imageHash, setImageHash] = React.useState("");
-  const [resolverUrl, setResolverUrl] = React.useState("");
-  const [timestamp, setTimestamp] = React.useState<
-    string | number | readonly string[] | undefined
-  >(Date());
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [imageHash, setImageHash] = useState("");
+  const [resolverUrl, setResolverUrl] = useState("");
+  const [timestamp, setTimestamp] = useState(Date());
 
-  const uploadImage = async (e: any) => {
+  const uploadImage = async (e) => {
     const file = e.target.files[0];
     const added = await client.add(file);
     setImageHash(added.path);

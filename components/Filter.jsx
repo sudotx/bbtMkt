@@ -2,14 +2,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/solid";
 import { Fragment } from "react";
 
-interface Props {
-  list: string[];
-  activeItem: string;
-  category: string;
-  onChange: (item: string) => void;
-}
 
-export const Filter: React.FC<Props> = ({
+export const Filter = ({
   list,
   activeItem,
   category,

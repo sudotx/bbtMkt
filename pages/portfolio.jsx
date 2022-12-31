@@ -6,37 +6,13 @@ import { PortfolioMarketCard } from "../components/PortfolioMarketCard";
 import { useData } from "../contexts/DataContext";
 import styles from "../styles/Home.module.css";
 
-export interface MarketProps {
-  id: string;
-  title?: string;
-  imageHash?: string;
-  totalAmount?: string;
-  totalYes?: string;
-  totalNo?: string;
-  userYes?: string;
-  hasResolved?: boolean;
-  userNo?: string;
-  timestamp?: string;
-  endTimestamp?: string;
-}
-
-export interface QuestionsProps {
-  id: string;
-  title?: string;
-  imageHash?: string;
-  totalAmount?: string;
-  totalYes?: string;
-  totalNo?: string;
-  hasResolved?: boolean;
-  endTimestamp?: string;
-}
 
 const Portfolio = () => {
   const { polymarket, account, loadWeb3, loading } = useData();
-  const [markets, setMarkets] = useState<MarketProps[]>([]);
-  const [portfolioValue, setPortfolioValue] = useState<number>(0);
-  const [allQuestions, setAllQuestions] = useState<QuestionsProps[]>([]);
-  const [openPositions, setOpenPositions] = useState<number>(0);
+  const [markets, setMarkets] = useState([]);
+  const [portfolioValue, setPortfolioValue] = useState(0);
+  const [allQuestions, setAllQuestions] = useState([]);
+  const [openPositions, setOpenPositions] = useState(0);
 
   const getMarkets = useCallback(async () => {
     var totalQuestions = await polymarket.methods
@@ -58,13 +34,13 @@ const Portfolio = () => {
       });
     }
 
-    var dataArray: MarketProps[] = [];
+    var dataArray = [];
     var totalPortValue = 0;
     for (var i = 0; i < totalQuestions; i++) {
       var data = await polymarket.methods
         .getGraphData(i)
         .call({ from: account });
-      data["0"].forEach((item: any) => {
+      data["0"].forEach((item) => {
         if (item[0] == account) {
           dataArray.push({
             id: i.toString(),
@@ -74,7 +50,7 @@ const Portfolio = () => {
           totalPortValue += parseInt(item[1]);
         }
       });
-      data["1"].forEach((item: any) => {
+      data["1"].forEach((item) => {
         if (item[0] == account) {
           dataArray.push({
             id: i.toString(),
@@ -88,13 +64,13 @@ const Portfolio = () => {
     setPortfolioValue(totalPortValue);
     for (var i = 0; i < dataArray.length; i++) {
       var question = allQuestions.find((item) => item.id == dataArray[i].id);
-      dataArray[i].title = question!.title;
-      dataArray[i].imageHash = question!.imageHash;
-      dataArray[i].totalAmount = question!.totalAmount;
-      dataArray[i].totalYes = question!.totalYes;
-      dataArray[i].totalNo = question!.totalNo!;
-      dataArray[i].hasResolved = question!.hasResolved;
-      dataArray[i].endTimestamp = question!.endTimestamp;
+      dataArray[i].title = question.title;
+      dataArray[i].imageHash = question.imageHash;
+      dataArray[i].totalAmount = question.totalAmount;
+      dataArray[i].totalYes = question.totalYes;
+      dataArray[i].totalNo = question.totalNo;
+      dataArray[i].hasResolved = question.hasResolved;
+      dataArray[i].endTimestamp = question.endTimestamp;
     }
     setMarkets(dataArray);
   }, [account, polymarket]);
@@ -129,17 +105,17 @@ const Portfolio = () => {
           {markets.map((market) => (
             <PortfolioMarketCard
               id={market.id}
-              title={market.title!}
-              imageHash={market.imageHash!}
-              totalAmount={market.totalAmount!}
-              totalYes={market.totalYes!}
-              totalNo={market.totalNo!}
-              userYes={market.userYes!}
-              userNo={market.userNo!}
-              key={market.id!}
-              hasResolved={market.hasResolved!}
-              timestamp={market.timestamp!}
-              endTimestamp={market.endTimestamp!}
+              title={market.title}
+              imageHash={market.imageHash}
+              totalAmount={market.totalAmount}
+              totalYes={market.totalYes}
+              totalNo={market.totalNo}
+              userYes={market.userYes}
+              userNo={market.userNo}
+              key={market.id}
+              hasResolved={market.hasResolved}
+              timestamp={market.timestamp}
+              endTimestamp={market.endTimestamp}
             />
           ))}
         </div>

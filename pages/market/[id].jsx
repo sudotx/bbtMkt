@@ -8,26 +8,15 @@ import ChartContainer from "../../components/Chart/ChartContainer";
 import Navbar from "../../components/Navbar";
 import { useData } from "../../contexts/DataContext";
 
-export interface MarketProps {
-  id: string;
-  title: string;
-  imageHash: string;
-  totalAmount: number;
-  totalYes: number;
-  totalNo: number;
-  description: string;
-  endTimestamp: number;
-  resolverUrl: string;
-}
 
 const Details = () => {
   const router = useRouter();
   const { id } = router.query;
   const { polymarket, account, loadWeb3, loading, polyToken } = useData();
-  const [market, setMarket] = useState<MarketProps>();
-  const [selected, setSelected] = useState<string>("YES");
+  const [market, setMarket] = useState();
+  const [selected, setSelected] = useState("YES");
   const [dataLoading, setDataLoading] = useState(true);
-  const [button, setButton] = useState<string>("Trade");
+  const [button, setButton] = useState("Trade");
 
   const [input, setInput] = useState("");
 

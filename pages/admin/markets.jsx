@@ -6,15 +6,15 @@ import { AdminMarketCard } from "../../components/AdminMarketCard";
 import Navbar from "../../components/Navbar";
 import { useData } from "../../contexts/DataContext";
 
-const Markets: React.FC = () => {
+const Markets = () => {
   const { polymarket, account, loadWeb3, loading } = useData();
-  const [markets, setMarkets] = useState<MarketProps[]>([]);
+  const [markets, setMarkets] = useState([]);
 
   const getMarkets = useCallback(async () => {
     var totalQuestions = await polymarket.methods
       .totalQuestions()
       .call({ from: account });
-    var dataArray: MarketProps[] = [];
+    var dataArray = [];
     for (var i = 0; i < totalQuestions; i++) {
       var data = await polymarket.methods.questions(i).call({ from: account });
       dataArray.push({
