@@ -51,22 +51,27 @@ export const useProviderData = () => {
     }
   };
 
-  // const loadBlockchainData = async () => {
-  //   var tempContract = new ethers.Contract(
-  //     Betmarket.abi,
-  //     0x7693d5Aa88004f6c5c2e16D7b13Db04aFaae797b
-  //   );
-  //   setPolymarket(tempContract);
-  //   var tempTokenContract = new ethers.Contract(
-  //     BetToken.abi,
-  //     0xe450830A28e479F8bd6f8C1706B1CAB160Cb313F
-  //   );
+  const loadBlockchainData = async () => {
+    const networkId = 80001
+    const deployedBetmarket = Betmarket.networks[networkId];
+    const deployedBetToken = BetToken.networks[networkId];
+    //
+    const tempContract = new web3.eth.Contract(
+      Betmarket.abi,
+      deployedBetmarket && deployedBetmarket.address,
+    );
+    setPolymarket(tempContract);
 
-  //   setPolyToken(tempTokenContract);
-  //   setTimeout(() => {
-  //     setLoading(false);
-  //   }, 500);
-  // };
+    const tempTokenContract = new web3.eth.Contract(
+      BetToken.abi,
+      deployedBetToken && deployedBetToken.address,
+    );
+
+    setPolyToken(tempTokenContract);
+    setTimeout(() => {
+      setLoading(false);
+    }, 500);
+  };
 
   return {
     account,
