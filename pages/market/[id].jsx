@@ -4,9 +4,13 @@ import Img from "next/image";
 import { useRouter } from "next/router";
 import React, { useCallback, useEffect, useState } from "react";
 import Web3 from "web3";
-import ChartContainer from "../../components/Chart/ChartContainer";
 import Navbar from "../../components/Navbar";
 import { useData } from "../../contexts/DataContext";
+import dynamic from 'next/dynamic'
+
+const DynamicPlot = dynamic(import('../../components/Chart/ChartContainer'), {
+  ssr: false
+})
 
 
 const Details = () => {
@@ -135,7 +139,7 @@ const Details = () => {
             <div className="flex flex-col space-y-3">
               <div className="w-full flex flex-row mt-5">
                 <div className="w-2/3 border rounded-lg p-1 pb-4 border-gray-300 mr-2">
-                  <ChartContainer questionId={market?.id ?? "0"} />
+                  <DynamicPlot questionId={market?.id ?? "0"} />
                 </div>
                 <div className="w-1/3 rounded-lg border border-gray-300 ml-2">
                   <div className="flex flex-col items-start p-6">

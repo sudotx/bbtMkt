@@ -4,7 +4,7 @@ import Web3 from "web3";
 import { useData } from "../../contexts/DataContext";
 
 
-const ChartContainer = ({ questionId }) => {
+export default ({ questionId }) => {
   const { polymarket } = useData();
 
   const fetchGraphData = async () => {
@@ -65,4 +65,3 @@ const ChartContainer = ({ questionId }) => {
   );
 };
 
-export default ChartContainer;
