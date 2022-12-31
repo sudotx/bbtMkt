@@ -4,7 +4,7 @@ import Web3 from "web3";
 import { useData } from "../../contexts/DataContext";
 
 
-export default ({ questionId }) => {
+export default function MyComponent({ questionId }) {
   const { polymarket } = useData();
 
   const fetchGraphData = async () => {
