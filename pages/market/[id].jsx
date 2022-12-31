@@ -7,8 +7,9 @@ import Web3 from "web3";
 import Navbar from "../../components/Navbar";
 import { useData } from "../../contexts/DataContext";
 import dynamic from 'next/dynamic'
+import MyComponent from '../../components/Chart/ChartContainer'
 
-const DynamicPlot = dynamic(import('../../components/Chart/ChartContainer'), {
+const DynamicPlot = dynamic(import(MyComponent), {
   ssr: false
 })
 
