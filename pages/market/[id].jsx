@@ -7,8 +7,6 @@ import Web3 from "web3";
 import Navbar from "../../components/Navbar";
 import { useData } from "../../contexts/DataContext";
 
-
-
 const Details = () => {
   const router = useRouter();
   const { id } = router.query;
@@ -185,7 +183,7 @@ const Details = () => {
                         autoComplete="off"
                       />
                       <span className="whitespace-nowrap text-sm font-semibold">
-                        POLY |{" "}
+                        BET |{" "}
                       </span>
                       <span className="text-sm font-semibold text-blue-700 mx-2 underline cursor-pointer">
                         Max
