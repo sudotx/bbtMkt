@@ -37,21 +37,21 @@ export const useProviderData = () => {
 
   const loadWeb3 = async () => {
     if (window.ethereum) {
-
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      window.web3 = new Web3(window.ethereum);
       await window.ethereum.enable();
-
-      const signer = provider.getSigner(0);
-      const address = await signer.getAddress();
-      setAccount(address);
-      await loadBlockchainData();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
     } else {
       window.alert("Non-Eth browser detected. Please consider using MetaMask.");
       return;
     }
+    var allAccounts = await window.web3.eth.getAccounts();
+    setAccount(allAccounts[0]);
+    await loadBlockchainData();
   };
 
   const loadBlockchainData = async () => {
+    const web3 = window.web3;
     const networkId = 80001
     const deployedBetmarket = Betmarket.networks[networkId];
     const deployedBetToken = BetToken.networks[networkId];
